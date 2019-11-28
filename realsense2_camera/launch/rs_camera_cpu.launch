@@ -10,45 +10,46 @@
 
   <arg name="fisheye_width"       default="640"/>
   <arg name="fisheye_height"      default="480"/>
-  <arg name="enable_fisheye"      default="true"/>
+  <arg name="enable_fisheye"      default="false"/>
 
-  <arg name="depth_width"         default="640"/>
-  <arg name="depth_height"        default="480"/>
+  <arg name="depth_width"         default="424"/>
+  <arg name="depth_height"        default="240"/>
   <arg name="enable_depth"        default="true"/>
 
   <arg name="infra_width"        default="640"/>
   <arg name="infra_height"       default="480"/>
-  <arg name="enable_infra1"       default="true"/>
-  <arg name="enable_infra2"       default="true"/>
+  <arg name="enable_infra1"       default="false"/>
+  <arg name="enable_infra2"       default="false"/>
 
   <arg name="color_width"         default="640"/>
   <arg name="color_height"        default="480"/>
-  <arg name="enable_color"        default="true"/>
+  <arg name="enable_color"        default="false"/>
 
-  <arg name="fisheye_fps"         default="30"/>
-  <arg name="depth_fps"           default="30"/>
-  <arg name="infra_fps"           default="30"/>
-  <arg name="color_fps"           default="30"/>
+  <arg name="fisheye_fps"         default="6"/>
+  <arg name="depth_fps"           default="6"/>
+  <arg name="infra_fps"           default="6"/>
+  <arg name="color_fps"           default="6"/>
   <arg name="gyro_fps"            default="400"/>
   <arg name="accel_fps"           default="250"/>
-  <arg name="enable_gyro"         default="true"/>
-  <arg name="enable_accel"        default="true"/>
+  <arg name="enable_gyro"         default="false"/>
+  <arg name="enable_accel"        default="false"/>
 
-  <arg name="enable_pointcloud"         default="true"/>
-  <arg name="pointcloud_texture_stream" default="RS2_STREAM_COLOR"/>
+  <arg name="enable_pointcloud"         default="false"/>
+  <arg name="pointcloud_texture_stream" default="RS2_STREAM_ANY"/>
   <arg name="pointcloud_texture_index"  default="0"/>
 
-  <arg name="enable_sync"               default="true"/>
-  <arg name="align_depth"               default="true"/>
+  <arg name="enable_sync"               default="false"/>
+  <arg name="align_depth"               default="false"/>
 
   <arg name="publish_tf"                default="true"/>
   <arg name="tf_publish_rate"           default="0"/>
 
-  <arg name="filters"                   default=""/>
+  <arg name="filters"                   default="pointcloud"/>
+  <arg name="frames_queue_size"  	default="32"/>
   <arg name="clip_distance"             default="-2"/>
   <arg name="linear_accel_cov"          default="0.01"/>
   <arg name="initial_reset"             default="false"/>
-  <arg name="unite_imu_method"          default="linear_interpolation"/>
+  <arg name="unite_imu_method"          default=""/>
   <arg name="topic_odom_in"             default="odom_in"/>
   <arg name="calib_odom_file"           default=""/>
   <arg name="publish_odom_tf"           default="true"/>
@@ -110,10 +111,4 @@
       <arg name="allow_no_texture_points"  value="$(arg allow_no_texture_points)"/>
     </include>
   </group>
-   <node pkg="imu_filter_madgwick" type="imu_filter_node" name="ImuFilter">
-        <param name="use_mag" type="bool" value="false" />
-        <param name="_publish_tf" type="bool" value="false" />
-        <param name="_world_frame" type="string" value="enu" />
-        <remap from="/imu/data_raw" to="/camera/imu"/>
-    </node>
 </launch>
