@@ -1,5 +1,5 @@
 # 新增内容
-## 降低CPU
+## 降低CPU占用率
 在'./realsense2_camara/launch/rs_camera_cpu.launch'中，修改包括：
 降低fps为6HZ，关闭'fisheye''color''pointcloud'
 
